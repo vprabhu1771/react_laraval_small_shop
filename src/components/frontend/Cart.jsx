@@ -48,7 +48,7 @@ const Cart = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        cart_id: id, // Correctly stringify the body
+        body: id ? JSON.stringify({ cart_id: id }) : undefined, // Stringify body only if id is provided
       }),
     });
 
@@ -110,20 +110,12 @@ const Cart = () => {
 
   const clearCart = async () => {
     try {
-      const token = localStorage.getItem('token');
-
-      const response = await fetch(`${API_URL}/clear-cart`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        }        
-      });
+      const response = await apiRequest('/clear-cart', 'POST'); // Call apiRequest without cart_id
       setMessage(response.message); // Set success message
-      fetchCartItems(); // Refresh cart items after decrement
+      fetchCartItems(); // Refresh cart items after clearing
     } catch (error) {
-      setMessage(`Error removing product: ${error.message}`); // Set error message
-      console.error('Error removing product:', error);
+      setMessage(`Error clearing cart: ${error.message}`); // Set error message
+      console.error('Error clearing cart:', error);
     }
   };
 

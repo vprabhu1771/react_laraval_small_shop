@@ -6,28 +6,32 @@ import Login from './components/frontend/auth/Login';
 import Register from './components/frontend/auth/Register';
 import Cart from './components/frontend/Cart';
 
+import { AuthProvider } from './context/AuthContext';
+
 function App() {
   
   return (
-    <Router>
+    <AuthProvider>
+      <Router>
 
-      <AppLayout>
+        <AppLayout>
 
-        <Routes>
+          <Routes>
 
-          <Route path='/' element={<Home />} />
+            <Route path='/' element={<Home />} />
 
-          <Route path='/login' element={<Login />} />
+            <Route path='/login' element={<Login />} />
 
-          <Route path='/register' element={<Register />} />
+            <Route path='/register' element={<Register />} />
 
-          <Route path='/cart' element={<Cart />} />
+            <Route path='/cart' element={<Cart />} />
 
-        </Routes>
+          </Routes>
 
-      </AppLayout>
+        </AppLayout>
 
-    </Router>
+      </Router>
+    </AuthProvider>
   )
   
 }

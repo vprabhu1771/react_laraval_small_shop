@@ -47,9 +47,7 @@ const Cart = () => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        body: id ? JSON.stringify({ cart_id: id }) : undefined, // Stringify body only if id is provided
-      }),
+      body: id ? JSON.stringify({ cart_id: id }) : undefined, // Stringify body only if id is provided
     });
 
     if (!response.ok) {
